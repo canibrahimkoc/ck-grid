@@ -41,34 +41,52 @@ $wrapper-gutter-xl: 15px !default;
     }
 }
 
+@mixin gutter {
+    @include mq(xs,max) {
+        padding: 0 $wrapper-gutter-xs;
+    }
+
+    @include mq(sm) {
+        padding: 0 $wrapper-gutter-sm;
+    }
+
+    @include mq(md) {
+        padding: 0 $wrapper-gutter-md;
+    }
+
+    @include mq(lg) {
+        padding: 0 $wrapper-gutter-lg;
+    }
+
+    @include mq(xl) {
+        padding: 0 $wrapper-gutter-xl;
+    }
+}
+
 @mixin container {
     [class$="-container"] {
         margin: 0 auto;
         display: block;
+        @include gutter;
 
         @include mq(xs,max) {
             width: $wrapper-width-xs;
-            padding: 0 $wrapper-gutter-xs;
         }
 
         @include mq(sm) {
             width: $wrapper-width-sm;
-            padding: 0 $wrapper-gutter-sm;
         }
 
         @include mq(md) {
             width: $wrapper-width-md;
-            padding: 0 $wrapper-gutter-md;
         }
 
         @include mq(lg) {
             width: $wrapper-width-lg;
-            padding: 0 $wrapper-gutter-lg;
         }
 
         @include mq(xl) {
             width: $wrapper-width-xl;
-            padding: 0 $wrapper-gutter-xl;
         }
 
         @include clear;
@@ -82,6 +100,17 @@ $wrapper-gutter-xl: 15px !default;
 
         @include clear;
     }
+}
+
+@mixin row ($offset: null) {
+    @if ($offset == null) {
+        @include gutter;
+    }
+    @else {
+        padding: 0 $offset !important;
+    }
+
+    @include clear;
 }
 
 @mixin grid ($sum: 1, $col: 1, $position: null, $margin: null, $offset: null, $important: null) {
