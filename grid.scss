@@ -1,4 +1,3 @@
-
 $wrapper-breakpoints: (xs: 576px, sm: 576px, md: 768px, lg: 992px, xl:1200px ) !default;
 
 $wrapper-width-xs: 100% !default;
@@ -42,8 +41,9 @@ $wrapper-padding-xl: 15px !default;
 }
 
 @mixin container {
-    div[class$="-container"] {
+    [class$="-container"] {
         margin: 0 auto;
+        display: block;
 
         @include mq(xs,max) {
             width: $wrapper-width-xs;
@@ -73,10 +73,11 @@ $wrapper-padding-xl: 15px !default;
         @include clear;
     }
 
-    div[class$="-full"] {
+    [class$="-full"] {
         margin: 0;
-        width: 100%;
         padding: 0;
+        display: block;
+        width: 100%;
 
         @include clear;
     }
