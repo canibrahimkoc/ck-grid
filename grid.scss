@@ -1,3 +1,88 @@
+$wrapper-breakpoints: (xs: 576px, sm: 576px, md: 768px, lg: 992px, xl:1200px ) !default;
+
+$wrapper-width-xs: 100% !default;
+$wrapper-width-sm: 100% !default;
+$wrapper-width-md: 100% !default;
+$wrapper-width-lg: 960px !default;
+$wrapper-width-xl: 1140px !default;
+
+$wrapper-padding-xs: 10px !default;
+$wrapper-padding-sm: 10px !default;
+$wrapper-padding-md: 15px !default;
+$wrapper-padding-lg: 15px !default;
+$wrapper-padding-xl: 15px !default;
+
+
+@mixin mq($width, $type: min) {
+    @if map_has_key($wrapper-breakpoints, $width) {
+        $width: map_get($wrapper-breakpoints, $width);
+
+        @if $type == max {
+            $width: $width - 1px;
+        }
+
+        @media only screen and (#{$type}-width: $width) {
+            @content;
+        }
+    }
+}
+
+@mixin clear() {
+    &:before, &:after {
+        content: "\0020";
+        display: block;
+        height: 0;
+        overflow: hidden;
+    }
+
+    &:after {
+        clear: both;
+    }
+}
+
+@mixin container {
+    div[class$="-container"] {
+        width: 100%;
+        padding: 0 $wrapper-padding-xl;
+        margin: 0 auto;
+
+        @include mq(xs) {
+            width: $wrapper-width-xs;
+            padding: 0 $wrapper-padding-xs;
+        }
+
+        @include mq(sm) {
+            width: $wrapper-width-sm;
+            padding: 0 $wrapper-padding-sm;
+        }
+
+        @include mq(md) {
+            width: $wrapper-width-md;
+            padding: 0 $wrapper-padding-md;
+        }
+
+        @include mq(lg) {
+            width: $wrapper-width-lg;
+            padding: 0 $wrapper-padding-lg;
+        }
+
+        @include mq(xl) {
+            width: $wrapper-width-xl;
+            padding: 0 $wrapper-padding-xl;
+        }
+
+        @include clear;
+    }
+
+    div[class$="-full"] {
+        margin: 0;
+        width: 100%;
+        padding: 0;
+
+        @include clear;
+    }
+}
+
 @mixin grid ($sum: 1, $col: 1, $position: null, $margin: null, $offset: null, $important: null) {
     $grid: percentage($col/$sum);
     $i: unquote("!important");
@@ -5,7 +90,7 @@
 
     @if $grid == 100% {
         float: none;
-        clear: both;
+        @include clear;
     }
     @else {
         float: left;
@@ -48,6 +133,10 @@
     @else if $position == "rl" {
         margin-right: calc(#{$margin} / 2);
         margin-left: calc(#{$margin} / 2);
+    }
+    @else if $position == "wide" {
+        padding-right: $margin;
+        padding-left: $margin;
     }
     @else {
         margin-right: 0;
