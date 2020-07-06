@@ -43,6 +43,33 @@ $wrapper-gutter-xl: 15px !default;
 
 @mixin gutter {
     @include mq(xs,max) {
+        padding-right: $wrapper-gutter-xs !important;
+        padding-left: $wrapper-gutter-xs !important;
+    }
+
+    @include mq(sm) {
+        padding-right: $wrapper-gutter-sm !important;
+        padding-left: $wrapper-gutter-sm !important;
+    }
+
+    @include mq(md) {
+        padding-right: $wrapper-gutter-md !important;
+        padding-left: $wrapper-gutter-md !important;
+    }
+
+    @include mq(lg) {
+        padding-right: $wrapper-gutter-lg !important;
+        padding-left: $wrapper-gutter-lg !important;
+    }
+
+    @include mq(xl) {
+        padding-right: $wrapper-gutter-xl !important;
+        padding-left: $wrapper-gutter-xl !important;
+    }
+}
+
+@mixin offset {
+    @include mq(xs,max) {
         margin-right: $wrapper-gutter-xs !important;
         margin-left: $wrapper-gutter-xs !important;
     }
@@ -171,7 +198,7 @@ $wrapper-gutter-xl: 15px !default;
         margin-left: calc(#{$margin} / 2);
     }
     @else if $position == "wide" {
-        @include gutter;
+        @include offset;
     }
 
     @if ($offset == null) {
