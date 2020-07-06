@@ -43,23 +43,28 @@ $wrapper-gutter-xl: 15px !default;
 
 @mixin gutter {
     @include mq(xs,max) {
-        padding: 0 $wrapper-gutter-xs;
+        margin-right: $wrapper-gutter-xs !important;
+        margin-left: $wrapper-gutter-xs !important;
     }
 
     @include mq(sm) {
-        padding: 0 $wrapper-gutter-sm;
+        margin-right: $wrapper-gutter-sm !important;
+        margin-left: $wrapper-gutter-sm !important;
     }
 
     @include mq(md) {
-        padding: 0 $wrapper-gutter-md;
+        margin-right: $wrapper-gutter-md !important;
+        margin-left: $wrapper-gutter-md !important;
     }
 
     @include mq(lg) {
-        padding: 0 $wrapper-gutter-lg;
+        margin-right: $wrapper-gutter-lg !important;
+        margin-left: $wrapper-gutter-lg !important;
     }
 
     @include mq(xl) {
-        padding: 0 $wrapper-gutter-xl;
+        margin-right: $wrapper-gutter-xl !important;
+        margin-left: $wrapper-gutter-xl !important;
     }
 }
 
@@ -102,6 +107,7 @@ $wrapper-gutter-xl: 15px !default;
     }
 }
 
+
 @mixin row ($offset: null) {
     @if ($offset == null) {
         @include gutter;
@@ -120,7 +126,7 @@ $wrapper-gutter-xl: 15px !default;
 
     @if $grid == 100% {
         float: none;
-        @include clear;
+        clear: both;
     }
     @else {
         float: left;
@@ -165,12 +171,7 @@ $wrapper-gutter-xl: 15px !default;
         margin-left: calc(#{$margin} / 2);
     }
     @else if $position == "wide" {
-        padding-right: $margin;
-        padding-left: $margin;
-    }
-    @else {
-        margin-right: 0;
-        margin-left: 0;
+        @include gutter;
     }
 
     @if ($offset == null) {
