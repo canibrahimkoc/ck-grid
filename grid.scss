@@ -1,0 +1,63 @@
+@mixin grid ($sum: 1, $col: 1, $position: null, $margin: null, $offset: null, $important: null) {
+    $grid: percentage($col/$sum);
+    $i: unquote("!important");
+    display: block;
+
+    @if $grid == 100% {
+        float: none;
+        clear: both;
+    }
+    @else {
+        float: left;
+        clear: none;
+    }
+
+    @if $important == "i" {
+        $i: unquote("!important");
+    }
+    @else {
+        $i: unquote("");
+    }
+
+    @if $margin > 0 {
+        width: -webkit-calc(#{$grid} - #{$margin}) $i;
+        width: -moz-calc(#{$grid} - #{$margin}) $i;
+        width: -ms-calc(#{$grid} - #{$margin}) $i;
+        width: -o-calc(#{$grid} - #{$margin}) $i;
+        width: calc(#{$grid} - #{$margin}) $i;
+    }
+    @else if $margin == 0 {
+        width: $grid $i;
+    }
+
+    @if $position == "r" {
+        margin-right: $margin;
+    }
+    @else if $position == "l" {
+        margin-left: $margin;
+    }
+    @else if $position == "t" {
+        margin-top: $margin;
+    }
+    @else if $position == "b" {
+        margin-bottom: $margin;
+    }
+    @else if $position == "c" {
+        margin: 0 auto;
+    }
+    @else if $position == "rl" {
+        margin-right: calc(#{$margin} / 2);
+        margin-left: calc(#{$margin} / 2);
+    }
+    @else {
+        margin-right: 0;
+        margin-left: 0;
+    }
+
+    @if ($offset == null) {
+        margin-bottom: 0;
+    }
+    @else {
+        margin-bottom: $offset;
+    }
+}
