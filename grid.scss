@@ -7,11 +7,11 @@ $wrapper-width-md: 100% !default;
 $wrapper-width-lg: 960px !default;
 $wrapper-width-xl: 1140px !default;
 
-$wrapper-padding-xs: 10px !default;
-$wrapper-padding-sm: 10px !default;
-$wrapper-padding-md: 15px !default;
-$wrapper-padding-lg: 15px !default;
-$wrapper-padding-xl: 15px !default;
+$wrapper-gutter-xs: 10px !default;
+$wrapper-gutter-sm: 10px !default;
+$wrapper-gutter-md: 15px !default;
+$wrapper-gutter-lg: 15px !default;
+$wrapper-gutter-xl: 15px !default;
 
 
 @mixin mq($width, $type: min) {
@@ -48,27 +48,27 @@ $wrapper-padding-xl: 15px !default;
 
         @include mq(xs,max) {
             width: $wrapper-width-xs;
-            padding: 0 $wrapper-padding-xs;
+            padding: 0 $wrapper-gutter-xs;
         }
 
         @include mq(sm) {
             width: $wrapper-width-sm;
-            padding: 0 $wrapper-padding-sm;
+            padding: 0 $wrapper-gutter-sm;
         }
 
         @include mq(md) {
             width: $wrapper-width-md;
-            padding: 0 $wrapper-padding-md;
+            padding: 0 $wrapper-gutter-md;
         }
 
         @include mq(lg) {
             width: $wrapper-width-lg;
-            padding: 0 $wrapper-padding-lg;
+            padding: 0 $wrapper-gutter-lg;
         }
 
         @include mq(xl) {
             width: $wrapper-width-xl;
-            padding: 0 $wrapper-padding-xl;
+            padding: 0 $wrapper-gutter-xl;
         }
 
         @include clear;
