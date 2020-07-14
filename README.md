@@ -1,7 +1,7 @@
 # ck-grid
 
 ```sh
-    <div class="main-container">
+    <div class="page-container">
         <div class="row">
             <div class="col">test</div>
             <div class="col">test</div>
@@ -24,6 +24,8 @@
 
 
 ```sh
+    @include container;
+    
     .row {
         @include row;
 
