@@ -1,3 +1,4 @@
+// Wrapper breakpoints
 $wrapper-breakpoints: (xs:576px, sm:576px, md:768px, lg:992px, xl:1200px) !default;
 $wrapper-width: (xs:100%, sm:100%, md:100%, lg:960px, xl:1140px) !default;
 $wrapper-gutter: (xs:10px, sm:10px, md:10px, lg:15px, xl:15px) !default;
@@ -144,17 +145,18 @@ $wrapper-gutter: (xs:10px, sm:10px, md:10px, lg:15px, xl:15px) !default;
     #{$key}: calc(#{$value});
 }
 
+@mixin column($width,$grid: 0) {
+  $space: map-get($wrapper-gutter,$width) * 2;
+  @include calc("width", "#{$grid} - #{$space}");
+  margin-right: map-get($wrapper-gutter,$width);
+  margin-left: map-get($wrapper-gutter,$width);
+}
+
+
 @mixin grid ($sum: 1, $col: 1, $position: null, $margin: 0, $important: null) {
     $grid: percentage($col/$sum);
     $i: unquote("!important");
     display: block;
-
-    @mixin column($width) {
-        $space: map-get($wrapper-gutter,$width) * 2;
-        @include calc("width", "#{$grid} - #{$space}");
-        margin-right: map-get($wrapper-gutter,$width);
-        margin-left: map-get($wrapper-gutter,$width);
-    }
 
     @if $grid == 100% {
         float: none;
@@ -188,23 +190,23 @@ $wrapper-gutter: (xs:10px, sm:10px, md:10px, lg:15px, xl:15px) !default;
     }
     @else {
         @include mq(xs,max) {
-            @include column(xs);
+            @include column(xs,$grid);
         }
 
         @include mq(sm) {
-            @include column(sm);
+            @include column(sm,$grid);
         }
 
         @include mq(md) {
-            @include column(md);
+            @include column(md,$grid);
         }
 
         @include mq(lg) {
-            @include column(lg);
+            @include column(lg,$grid);
         }
 
         @include mq(xl) {
-            @include column(xl);
+            @include column(xl,$grid);
         }
     }
 
