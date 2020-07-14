@@ -1,8 +1,6 @@
 # ck-grid
 
-###Demo link [Heading link](https://codepen.io/canibrahimkoc/pen/abdaZbz "CK Grid")
-
-
+###Demo link : <https://codepen.io/canibrahimkoc/pen/abdaZbz>
 
 ####Html code
 
