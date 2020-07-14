@@ -92,7 +92,7 @@ $wrapper-gutter: (xs:10px, sm:10px, md:10px, lg:15px, xl:15px) !default;
     }
 }
 
-@mixin row ($offset: null) {
+@mixin row($offset: null) {
 
     @if ($offset == null) {
         @include mq(xs,max) {
@@ -138,27 +138,80 @@ $wrapper-gutter: (xs:10px, sm:10px, md:10px, lg:15px, xl:15px) !default;
     margin-left: map-get($wrapper-gutter,$width);
 }
 
+@mixin colmbug($width,$grid: 0,$margin: 0) {
+    $spacebug: map-get($wrapper-gutter,$width) + $margin;
+    @include calc("width", "#{$grid} - #{$spacebug}");
+}
+
 @mixin grid ($sum: 1, $col: 1, $position: null, $margin: 0, $important: null) {
     $grid: percentage($col/$sum);
     $i: unquote("!important");
-    display: block;
 
     @if $grid == 100% {
+        display: block;
         float: none;
         clear: both;
         width: 100%;
         @include clear;
     }
     @else {
+        display: block;
         float: left;
         clear: none;
     }
 
+    @if $important == "i" {
+        $i: unquote("!important");
+    }
+    @else {
+        $i: unquote("");
+    }
+
     @if $position == "right" {
         margin-right: $margin;
+
+        @include mq(xs,max) {
+            @include colmbug(xs,$grid,$margin);
+        }
+
+        @include mq(sm) {
+            @include colmbug(sm,$grid,$margin);
+        }
+
+        @include mq(md) {
+            @include colmbug(md,$grid,$margin);
+        }
+
+        @include mq(lg) {
+            @include colmbug(lg,$grid,$margin);
+        }
+
+        @include mq(xl) {
+            @include colmbug(xl,$grid,$margin);
+        }
     }
     @else if $position == "left" {
         margin-left: $margin;
+
+        @include mq(xs,max) {
+            @include colmbug(xs,$grid,$margin);
+        }
+
+        @include mq(sm) {
+            @include colmbug(sm,$grid,$margin);
+        }
+
+        @include mq(md) {
+            @include colmbug(md,$grid,$margin);
+        }
+
+        @include mq(lg) {
+            @include colmbug(lg,$grid,$margin);
+        }
+
+        @include mq(xl) {
+            @include colmbug(xl,$grid,$margin);
+        }
     }
     @else if $position == "top" {
         margin-top: $margin;
@@ -172,6 +225,7 @@ $wrapper-gutter: (xs:10px, sm:10px, md:10px, lg:15px, xl:15px) !default;
     @else if $position == "rl" {
         margin-right: calc(#{$margin} / 2);
         margin-left: calc(#{$margin} / 2);
+        @include calc("width", "#{$grid} - #{$margin}");
     }
     @else {
         @include mq(xs,max) {
@@ -193,33 +247,5 @@ $wrapper-gutter: (xs:10px, sm:10px, md:10px, lg:15px, xl:15px) !default;
         @include mq(xl) {
             @include column(xl,$grid);
         }
-    }
-
-    @if $margin > 0 {
-        width: -webkit-calc(#{$grid} - #{$margin}) $i;
-        width: -moz-calc(#{$grid} - #{$margin}) $i;
-        width: -ms-calc(#{$grid} - #{$margin}) $i;
-        width: -o-calc(#{$grid} - #{$margin}) $i;
-        width: calc(#{$grid} - #{$margin}) $i;
-    }
-
-    @if $important == "i" {
-        $i: unquote("!important");
-    }
-    @else {
-        $i: unquote("");
-    }
-}
-
-@mixin clear {
-    &:before, &:after {
-        content: "\0020";
-        display: block;
-        height: 0;
-        overflow: hidden;
-    }
-
-    &:after {
-        clear: both;
     }
 }
