@@ -1,18 +1,18 @@
-// Wrapper breakpoints
 $wrapper-breakpoints: (xs:576px, sm:576px, md:768px, lg:992px, xl:1200px) !default;
 $wrapper-width: (xs:100%, sm:100%, md:100%, lg:960px, xl:1140px) !default;
 $wrapper-gutter: (xs:10px, sm:10px, md:10px, lg:15px, xl:15px) !default;
 
-@mixin clear {
-    &:before, &:after {
-        content: "\0020";
-        display: block;
-        height: 0;
-        overflow: hidden;
-    }
+@mixin mq($width, $type: min) {
+    @if map_has_key($wrapper-breakpoints, $width) {
+        $width: map_get($wrapper-breakpoints, $width);
 
-    &:after {
-        clear: both;
+        @if $type == max {
+            $width: $width - 1px;
+        }
+
+        @media only screen and (#{$type}-width: $width) {
+            @content;
+        }
     }
 }
 
@@ -28,20 +28,6 @@ $wrapper-gutter: (xs:10px, sm:10px, md:10px, lg:15px, xl:15px) !default;
 @mixin gutter($margin) {
     margin-right: - map-get($wrapper-gutter,$margin);
     margin-left: - map-get($wrapper-gutter,$margin);
-}
-
-@mixin mq($width, $type: min) {
-    @if map_has_key($wrapper-breakpoints, $width) {
-        $width: map_get($wrapper-breakpoints, $width);
-
-        @if $type == max {
-            $width: $width - 1px;
-        }
-
-        @media only screen and (#{$type}-width: $width) {
-            @content;
-        }
-    }
 }
 
 @mixin container {
@@ -146,12 +132,11 @@ $wrapper-gutter: (xs:10px, sm:10px, md:10px, lg:15px, xl:15px) !default;
 }
 
 @mixin column($width,$grid: 0) {
-  $space: map-get($wrapper-gutter,$width) * 2;
-  @include calc("width", "#{$grid} - #{$space}");
-  margin-right: map-get($wrapper-gutter,$width);
-  margin-left: map-get($wrapper-gutter,$width);
+    $space: map-get($wrapper-gutter,$width) * 2;
+    @include calc("width", "#{$grid} - #{$space}");
+    margin-right: map-get($wrapper-gutter,$width);
+    margin-left: map-get($wrapper-gutter,$width);
 }
-
 
 @mixin grid ($sum: 1, $col: 1, $position: null, $margin: 0, $important: null) {
     $grid: percentage($col/$sum);
@@ -223,5 +208,18 @@ $wrapper-gutter: (xs:10px, sm:10px, md:10px, lg:15px, xl:15px) !default;
     }
     @else {
         $i: unquote("");
+    }
+}
+
+@mixin clear {
+    &:before, &:after {
+        content: "\0020";
+        display: block;
+        height: 0;
+        overflow: hidden;
+    }
+
+    &:after {
+        clear: both;
     }
 }
