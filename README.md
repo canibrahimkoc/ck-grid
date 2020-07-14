@@ -29,8 +29,10 @@
     .row {
         @include row;
 
-        .col {
-            @include grid(6,1);
+        &:nth-child(1) {
+            .col {
+                @include grid(6,1);
+            }
         }
 
         &:nth-child(2) {
