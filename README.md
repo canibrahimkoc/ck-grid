@@ -1,8 +1,8 @@
 # ck-grid
 
-###Demo link : <https://codepen.io/canibrahimkoc/pen/abdaZbz>
+Demo link : <https://codepen.io/canibrahimkoc/pen/abdaZbz>
 
-####Html code
+Html code
 
 ```html
     <div class="page-container">
@@ -26,7 +26,7 @@
     </div>
 ```
 
-####Sass code
+Sass code
 
 ```sh
     @include container;
