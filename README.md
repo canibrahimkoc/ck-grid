@@ -1,6 +1,6 @@
 # ck-grid
 
-Demo: <https://codepen.io/canibrahimkoc/pen/abdaZbz/>
+Demo: <https://codepen.io/canibrahimkoc/full/abdaZbz>
 
 ck-grid.scss lets you style embedded grid using SCSS. It's as simple as declaring all the required variables and importing the `ck-grid.scss` file into your Sass project.
 
@@ -63,5 +63,42 @@ $wrapper-gutter: (xs:10px, sm:10px, md:10px, lg:15px, xl:15px) !default;
                 @include grid(2,1);
             }
         }
+    }
+```
+
+
+
+## Responsive Example
+
+```S
+    @include mq(xl,max) {
+        //
+    }
+    @include mq(xl,min) {
+        //
+    }
+    @include mq(lg,max) {
+        //
+    }
+    @include mq(lg,min) {
+        //
+    }
+    @include mq(md,max) {
+        //
+    }
+    @include mq(md,min) {
+        //
+    }
+    @include mq(sm,max) {
+        //
+    }
+    @include mq(sm,min) {
+        //
+    }
+    @include mq(xs,max) {
+        //
+    }
+    @include mq(xs,min) {
+        //
     }
 ```
