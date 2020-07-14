@@ -1,8 +1,20 @@
 # ck-grid
 
-Demo link : <https://codepen.io/canibrahimkoc/pen/abdaZbz>
+# [gist.scss](https://codepen.io/canibrahimkoc/pen/abdaZbz/)
 
-Html code
+ck-grid.scss lets you style embedded gists using SCSS. It's as simple as declaring all the required variables and importing the `gist.scss` file into your Sass project.
+
+## Options
+
+```scss
+
+$wrapper-breakpoints: (xs:576px, sm:576px, md:768px, lg:992px, xl:1200px) !default;
+$wrapper-width: (xs:100%, sm:100%, md:100%, lg:960px, xl:1140px) !default;
+$wrapper-gutter: (xs:10px, sm:10px, md:10px, lg:15px, xl:15px) !default;
+
+```
+
+## Html Example
 
 ```html
     <div class="page-container">
@@ -26,9 +38,9 @@ Html code
     </div>
 ```
 
-Sass code
+## Sass Example
 
-```sh
+```S
     @include container;
     
     .row {
