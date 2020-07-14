@@ -1,6 +1,4 @@
-
 $wrapper-breakpoints: (xs: 576px, sm: 576px, md: 768px, lg: 992px, xl:1200px ) !default;
-
 $wrapper-width-xs: 100% !default;
 $wrapper-width-sm: 100% !default;
 $wrapper-width-md: 100% !default;
@@ -13,6 +11,18 @@ $wrapper-gutter-md: 15px !default;
 $wrapper-gutter-lg: 15px !default;
 $wrapper-gutter-xl: 15px !default;
 
+@mixin clear {
+    &:before, &:after {
+        content: "\0020";
+        display: block;
+        height: 0;
+        overflow: hidden;
+    }
+
+    &:after {
+        clear: both;
+    }
+}
 
 @mixin mq($width, $type: min) {
     @if map_has_key($wrapper-breakpoints, $width) {
@@ -28,97 +38,39 @@ $wrapper-gutter-xl: 15px !default;
     }
 }
 
-@mixin clear() {
-    &:before, &:after {
-        content: "\0020";
-        display: block;
-        height: 0;
-        overflow: hidden;
-    }
-
-    &:after {
-        clear: both;
-    }
-}
-
-@mixin gutter {
-    @include mq(xs,max) {
-        padding-right: $wrapper-gutter-xs !important;
-        padding-left: $wrapper-gutter-xs !important;
-    }
-
-    @include mq(sm) {
-        padding-right: $wrapper-gutter-sm !important;
-        padding-left: $wrapper-gutter-sm !important;
-    }
-
-    @include mq(md) {
-        padding-right: $wrapper-gutter-md !important;
-        padding-left: $wrapper-gutter-md !important;
-    }
-
-    @include mq(lg) {
-        padding-right: $wrapper-gutter-lg !important;
-        padding-left: $wrapper-gutter-lg !important;
-    }
-
-    @include mq(xl) {
-        padding-right: $wrapper-gutter-xl !important;
-        padding-left: $wrapper-gutter-xl !important;
-    }
-}
-
-@mixin offset {
-    @include mq(xs,max) {
-        margin-right: $wrapper-gutter-xs !important;
-        margin-left: $wrapper-gutter-xs !important;
-    }
-
-    @include mq(sm) {
-        margin-right: $wrapper-gutter-sm !important;
-        margin-left: $wrapper-gutter-sm !important;
-    }
-
-    @include mq(md) {
-        margin-right: $wrapper-gutter-md !important;
-        margin-left: $wrapper-gutter-md !important;
-    }
-
-    @include mq(lg) {
-        margin-right: $wrapper-gutter-lg !important;
-        margin-left: $wrapper-gutter-lg !important;
-    }
-
-    @include mq(xl) {
-        margin-right: $wrapper-gutter-xl !important;
-        margin-left: $wrapper-gutter-xl !important;
-    }
-}
-
 @mixin container {
     [class$="-container"] {
         margin: 0 auto;
         display: block;
-        @include gutter;
 
         @include mq(xs,max) {
             width: $wrapper-width-xs;
+            padding-right: $wrapper-gutter-xs;
+            padding-left: $wrapper-gutter-xs;
         }
 
         @include mq(sm) {
             width: $wrapper-width-sm;
+            padding-right: $wrapper-gutter-sm;
+            padding-left: $wrapper-gutter-sm;
         }
 
         @include mq(md) {
             width: $wrapper-width-md;
+            padding-right: $wrapper-gutter-md;
+            padding-left: $wrapper-gutter-md;
         }
 
         @include mq(lg) {
             width: $wrapper-width-lg;
+            padding-right: $wrapper-gutter-lg;
+            padding-left: $wrapper-gutter-lg;
         }
 
         @include mq(xl) {
             width: $wrapper-width-xl;
+            padding-right: $wrapper-gutter-xl;
+            padding-left: $wrapper-gutter-xl;
         }
 
         @include clear;
@@ -126,28 +78,85 @@ $wrapper-gutter-xl: 15px !default;
 
     [class$="-full"] {
         margin: 0;
-        padding: 0;
         display: block;
         width: 100%;
+
+        @include mq(xs,max) {
+            padding-right: $wrapper-gutter-xs;
+            padding-left: $wrapper-gutter-xs;
+        }
+
+        @include mq(sm) {
+            padding-right: $wrapper-gutter-sm;
+            padding-left: $wrapper-gutter-sm;
+        }
+
+        @include mq(md) {
+            padding-right: $wrapper-gutter-md;
+            padding-left: $wrapper-gutter-md;
+        }
+
+        @include mq(lg) {
+            padding-right: $wrapper-gutter-lg;
+            padding-left: $wrapper-gutter-lg;
+        }
+
+        @include mq(xl) {
+            padding-right: $wrapper-gutter-xl;
+            padding-left: $wrapper-gutter-xl;
+        }
 
         @include clear;
     }
 }
 
-
 @mixin row ($offset: null) {
     @if ($offset == null) {
-        @include gutter;
+        margin-right: -$wrapper-gutter-xl;
+        margin-left: -$wrapper-gutter-xl;
+
+        @include mq(xl,max) {
+            margin-right: -$wrapper-gutter-xl;
+            margin-left: -$wrapper-gutter-xl;
+        }
+
+        @include mq(lg,max) {
+            margin-right: -$wrapper-gutter-lg;
+            margin-left: -$wrapper-gutter-lg;
+        }
+
+        @include mq(md,max) {
+            margin-right: -$wrapper-gutter-md;
+            margin-left: -$wrapper-gutter-md;
+        }
+
+        @include mq(sm,max) {
+            margin-right: -$wrapper-gutter-sm;
+            margin-left: -$wrapper-gutter-sm;
+        }
+
+        @include mq(xs,max) {
+            margin-right: -$wrapper-gutter-xs;
+            margin-left: -$wrapper-gutter-xs;
+        }
     }
     @else {
-        padding: 0 $offset !important;
+        margin-right: -$offset !important;
+        margin-left: -$offset !important;
     }
 
     @include clear;
 }
 
+@mixin calc($key, $value) {
+    #{$key}: -webkit-calc(#{$value});
+    #{$key}: -moz-calc(#{$value});
+    #{$key}: -ms-calc(#{$value});
+    #{$key}: -o-calc(#{$value});
+    #{$key}: calc(#{$value});
+}
 
-@mixin grid ($sum: 1, $col: 1, $position: null, $margin: 0, $gutter: 0, $important: null) {
+@mixin grid ($sum: 1, $col: 1, $position: null, $margin: 0, $gutter: gutter, $important: null) {
     $grid: percentage($col/$sum);
     $i: unquote("!important");
     display: block;
@@ -155,6 +164,8 @@ $wrapper-gutter-xl: 15px !default;
     @if $grid == 100% {
         float: none;
         clear: both;
+        width: 100%;
+        @include clear;
     }
     @else {
         float: left;
@@ -196,11 +207,44 @@ $wrapper-gutter-xl: 15px !default;
         margin-left: calc(#{$margin} / 2);
     }
     @else {
-        margin-right: 0;
-        margin-left: 0;
-    }
+        $space: $wrapper-gutter-xl * 2;
+        @include calc("width", "#{$grid} - #{$space}");
+        margin-right: $wrapper-gutter-xl;
+        margin-left: $wrapper-gutter-xl;
 
-    @if $gutter > 0 {
-        margin-bottom: $gutter;
+        @include mq(xl,max) {
+            $space: $wrapper-gutter-xl * 2;
+            @include calc("width", "#{$grid} - #{$space}");
+            margin-right: $wrapper-gutter-xl;
+            margin-left: $wrapper-gutter-xl;
+        }
+
+        @include mq(lg,max) {
+            $space: $wrapper-gutter-lg * 2;
+            @include calc("width", "#{$grid} - #{$space}");
+            margin-right: $wrapper-gutter-lg;
+            margin-left: $wrapper-gutter-lg;
+        }
+
+        @include mq(md,max) {
+            $space: $wrapper-gutter-md * 2;
+            @include calc("width", "#{$grid} - #{$space}");
+            margin-right: $wrapper-gutter-md;
+            margin-left: $wrapper-gutter-md;
+        }
+
+        @include mq(sm,max) {
+            $space: $wrapper-gutter-sm * 2;
+            @include calc("width", "#{$grid} - #{$space}");
+            margin-right: $wrapper-gutter-sm;
+            margin-left: $wrapper-gutter-sm;
+        }
+
+        @include mq(xs,max) {
+            $space: $wrapper-gutter-xs * 2;
+            @include calc("width", "#{$grid} - #{$space}");
+            margin-right: $wrapper-gutter-xs;
+            margin-left: $wrapper-gutter-xs;
+        }
     }
 }
