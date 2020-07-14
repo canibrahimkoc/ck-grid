@@ -1,8 +1,8 @@
 # ck-grid
 
-# [gist.scss](https://codepen.io/canibrahimkoc/pen/abdaZbz/)
+Demo: <https://codepen.io/canibrahimkoc/pen/abdaZbz/>
 
-ck-grid.scss lets you style embedded gists using SCSS. It's as simple as declaring all the required variables and importing the `gist.scss` file into your Sass project.
+ck-grid.scss lets you style embedded grid using SCSS. It's as simple as declaring all the required variables and importing the `ck-grid.scss` file into your Sass project.
 
 ## Options
 
