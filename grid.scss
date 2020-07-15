@@ -140,6 +140,8 @@ $wrapper-gutter: (xs:10px, sm:10px, md:10px, lg:15px, xl:15px) !default;
 
 @mixin colmbug($width,$grid: 0,$margin: 0) {
     $spacebug: map-get($wrapper-gutter,$width) + $margin;
+    margin-right: map-get($wrapper-gutter,$width);
+    margin-left: map-get($wrapper-gutter,$width);
     @include calc("width", "#{$grid} - #{$spacebug}");
 }
 
@@ -168,7 +170,7 @@ $wrapper-gutter: (xs:10px, sm:10px, md:10px, lg:15px, xl:15px) !default;
     }
 
     @if $position == "right" {
-        margin-right: $margin;
+        margin-right: $margin !important;
 
         @include mq(xs,max) {
             @include colmbug(xs,$grid,$margin);
@@ -191,7 +193,7 @@ $wrapper-gutter: (xs:10px, sm:10px, md:10px, lg:15px, xl:15px) !default;
         }
     }
     @else if $position == "left" {
-        margin-left: $margin;
+        margin-left: $margin !important;
 
         @include mq(xs,max) {
             @include colmbug(xs,$grid,$margin);
